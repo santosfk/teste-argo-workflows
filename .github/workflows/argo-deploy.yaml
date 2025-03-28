@@ -26,6 +26,10 @@ jobs:
         sudo mv argo-linux-amd64 /usr/local/bin/argo
         argo version
 
+    - name: Install gke-gcloud-auth-plugin
+      run: |
+        sudo apt-get update && sudo apt-get install -y google-cloud-sdk-gke-gcloud-auth-plugin
+
     - name: Set up GKE cluster
       run: |
         gcloud container clusters get-credentials ${{ secrets.CLUSTER_NAME }} --region us-central1 --project ${{secrets.GCP_PROJECT}}
