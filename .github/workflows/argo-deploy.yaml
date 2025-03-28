@@ -20,10 +20,7 @@ jobs:
 
     - name: Set up GKE cluster
       run: |
-        gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --region us-central1 --project ${{secrets.GCP_PROJECT}}
-      env:
-      GCP_REGION: us-central1
-      CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+        gcloud container clusters get-credentials ${{ secrets.CLUSTER_NAME }} --region us-central1 --project ${{secrets.GCP_PROJECT}}
     - name: Deploy workflows to Argo Workflows
       run: |
         for file in ../../../argo-workflows/*.yaml; do
