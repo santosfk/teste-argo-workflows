@@ -22,7 +22,7 @@ jobs:
       run: |
         gcloud container clusters get-credentials ${{ env.CLUSTER_NAME }} --region ${{ env.GCP_REGION }} --project ${{secrets.GCP_PROJECT}}
       env:
-      GCP_REGION: ${{ secrets.GCP_REGION }}
+      GCP_REGION: us-central1
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
     - name: Deploy workflows to Argo Workflows
       run: |
