@@ -24,9 +24,8 @@ jobs:
       env:
       GCP_REGION: ${{ secrets.GCP_REGION }}
       CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
-
     - name: Deploy workflows to Argo Workflows
       run: |
-        for file in ./workflows/*.yaml; do
+        for file in ../../../argo-workflows/*.yaml; do
           argo submit -n argo "$file" --watch
         done
