@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: simple-three-steps-
+spec:
+  entrypoint: main
+  templates:
+  - name: main
+    steps:
+    - - name: step-1
+        template: hello-world
+    - - name: step-2
+        template: wait-a-while
+    - - name: step-3
+        template: calculate-sum
+
+  - name: hello-world
+    container:
+      image: alpine:latest
+      command: [ echo, "Primeira etapa: Olá, mundo!" ]
+
+  - name: wait-a-while
+    container:
+      image: alpine:latest
+      command: [ sh, -c ]
+      args: [ "echo 'Segunda etapa: Esperando 10 segundos'; sleep 10; echo 'Espera concluída'" ]
+
+  - name: calculate-sum
+    container:
+      image: alpine:latest
+      command: [ sh, -c ]
+      args: [ "echo 'Terceira etapa: Calculando a soma de 5 + 3'; echo $((5 + 3))" ]
